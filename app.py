@@ -7,8 +7,8 @@ from datetime import datetime
 from ml_pipeline import run_ml_pipeline
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
-DB_FILE = '/tmp/database.db'
+app.config['UPLOAD_FOLDER'] = 'uploads'
+DB_FILE = 'database.db'
 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
@@ -19,7 +19,7 @@ from generate_datasets import generate_datasets
 @app.route('/api/generate_more', methods=['POST'])
 def generate_more():
     # Find next batch number
-    base_path = '/tmp/datasets'
+    base_path = 'datasets'
     if not os.path.exists(base_path):
         os.makedirs(base_path)
     
@@ -33,7 +33,7 @@ def generate_more():
 
 @app.route('/api/open_folder')
 def open_folder():
-    path = os.path.abspath('/tmp/datasets')
+    path = os.path.abspath('datasets')
     if os.name == 'nt': # Windows
         subprocess.Popen(['explorer', path])
     return jsonify({'success': True})
@@ -228,7 +228,7 @@ from flask import send_file
 
 @app.route('/api/datasets')
 def list_datasets():
-    base_path = '/tmp/datasets'
+    base_path = 'datasets'
     if not os.path.exists(base_path):
         return jsonify([])
     files = [f for f in os.listdir(base_path) if f.endswith('.csv')]
@@ -240,12 +240,12 @@ from flask import send_from_directory
 
 @app.route('/api/download_dataset/<filename>')
 def download_dataset(filename):
-    base_path = os.path.abspath('/tmp/datasets')
+    base_path = os.path.abspath('datasets')
     return send_from_directory(base_path, filename, as_attachment=True)
 
 @app.route('/api/run_dataset/<filename>', methods=['POST'])
 def run_library_dataset(filename):
-    base_path = '/tmp/datasets'
+    base_path = 'datasets'
     filepath = os.path.join(base_path, filename)
     if not os.path.exists(filepath):
         return jsonify({'error': 'File not found'}), 404

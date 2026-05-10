@@ -6,7 +6,7 @@ Built for the Data Science & Engineering Community
 The Wind Turbine Fault Detection Platform is a full-stack, real-time web application engineered to facilitate rigorous monitoring and analysis of wind turbine health. Moving away from manual inspections, this platform introduces an automated prediction system augmented by Machine Learning. The system autonomously processes sensor data, predicts fault classifications using XGBoost, and detects anomalies using DBSCAN clustering to ensure operational efficiency.
 
 ## 🌐 Live Demo
-*(Run locally via Flask on `http://localhost:5000`)*
+https://wind-turbine-fault-detection.onrender.com/login
 
 ### 1. 🧠 AI-Powered Automation
 - **Predictive Analytics:** An advanced XGBoost classifier automatically evaluates turbine sensor readings to categorize operational risk levels and predict potential faults.
